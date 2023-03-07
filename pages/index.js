@@ -1,20 +1,26 @@
 import { data } from 'autoprefixer'
 import Head from 'next/head'
 import Comment from './Comment'
+import SendComment from './SendComment'
 import commentsData from './api/data.json'
 
 export default function Home() {
 
+  const currentUser = commentsData.currentUser
   const commentOne = commentsData.comments[0]
   const commentTwo = commentsData.comments[1]
 
   function buildComment(comment) {
-    return <Comment username={comment.user.username}
-      image={comment.user.image.png}
-      createdAt={comment.createdAt}
-      content={comment.content}
-      score={comment.score}
+    const userData = comment.hasOwnProperty('user') ? comment.user : comment
+    return <Comment currentUser={currentUser.username}
+      key={comment.id} content={comment.content} createdAt={comment.createdAt} score={comment.score}{...userData}
     />
+  }
+
+  function buildReplies(comment) {
+    if (!comment.replies.length) return
+    console.log(comment.replies.length)
+    return comment.replies.map(reply => buildComment(reply))
   }
 
   return (
@@ -25,9 +31,24 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='bg-Light-gray min-h-screen font-rubik pt-5 flex flex-col items-center'>
-        {buildComment(commentOne)}
-        {buildComment(commentTwo)}
+      <main className='bg-Light-gray min-h-screen font-rubik pt-5 flex justify-center'>
+        <section className='flex flex-col content-center'>
+          <div>
+            {buildComment(commentOne)}
+            <div>
+              {buildReplies(commentOne)}
+            </div>
+          </div>
+
+          <div>
+            {buildComment(commentTwo)}
+            <div className='ml-5'>
+              {buildReplies(commentTwo)}
+            </div>
+          </div>
+          <SendComment image={currentUser.image.png} />
+        </section>
+
       </main>
     </>
   )
