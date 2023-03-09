@@ -1,19 +1,70 @@
 import { data } from 'autoprefixer'
 import Head from 'next/head'
+import { useState } from 'react'
 import Comment from './Comment'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 import commentsData from './api/data.json'
+import moment from 'moment/moment'
 
 export default function Home() {
 
 
   const currentUser = commentsData.currentUser
-  let commentSection = commentsData.comments
+  const [commentSection, setCommentSetion] = useState(commentsData.comments)
 
 
-  function buildCommentSection() {
-    return commentSection.map(comment => <CommentBlock key={comment.id} currentUser={currentUser} comment={comment} />)
+  function buildCommentSection(comments) {
+    return commentSection.map(comment => buildComment(comment))
+  }
+
+  function buildComment(comment) {
+    const userData = comment.user
+    return (
+      <>
+        <div>
+          <Comment currentUser={currentUser}
+            key={comment.id}
+            setIsReplying={false}
+            content={comment.content}
+            createdAt={comment.createdAt}
+            score={comment.score}
+            replies={comment.replies}
+            replyingTo={comment.replyingTo || null}
+            {...userData}
+          />
+
+        </div>
+        {comment.replies && comment.replies.length && (
+          <div className='before:content-[""] before:absolute before:bottom-0 before:top-0 before:left-16 before:border-l before:border-l-Light-grayish-blue relative'>
+            <div className='w-[90%] ml-auto'>
+              {comment.replies.map(reply => buildComment(reply))}
+            </div>
+          </div>
+        )}
+
+      </>
+
+    )
+  }
+
+  function buildCommentObj(text) {
+    const date = moment()
+    const newComment = {
+      id: commentSection.length + 1,
+      content: text,
+      createdAt: date.fromNow(),
+      score: 0,
+      user: currentUser,
+      replies: []
+    }
+
+    return newComment
+  }
+
+  function addNewComment(text) {
+    const newComment = buildCommentObj(text)
+    setCommentSetion(previousComments => [...previousComments, newComment])
   }
 
   return (
@@ -26,9 +77,9 @@ export default function Home() {
       </Head>
       <main className='bg-Light-gray min-h-screen font-rubik pt-5 flex justify-center'>
         <section className='flex flex-col '>
-          {buildCommentSection()}
+          {buildCommentSection(commentSection)}
 
-          <SendComment image={currentUser.image.png} />
+          <SendComment buttonText={'SEND'} submitComment={addNewComment} image={currentUser.image.png} />
         </section>
 
       </main>
