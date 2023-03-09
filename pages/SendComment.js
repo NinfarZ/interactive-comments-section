@@ -9,7 +9,8 @@ export default function SendComment(props) {
     }
 
     const handleCommentSubmit = () => {
-        props.submitComment(comment)
+        props.submitComment(comment, props.replyingTo)
+        props.hasReplied && props.hasReplied()
     }
     return (
         <div className=' bg-White m-3 p-5 rounded-lg flex flex-col max-w-5xl space-y-3'>

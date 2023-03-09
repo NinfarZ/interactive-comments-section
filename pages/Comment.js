@@ -8,9 +8,8 @@ export default function Comment(props) {
 
     const [score, setScore] = useState(props.score)
     const [isEditing, setIsEditing] = useState(false)
-    const [content, setContent] = useState(props.content)
-    const [replies, setReplies] = useState(props.replies)
     const [isReplying, setIsReplying] = useState(false)
+    const [content, setContent] = useState(props.content)
     const [userScore, setUserScore] = useState(0)
     const [isVisible, setIsVisible] = useState(true)
 
@@ -25,6 +24,10 @@ export default function Comment(props) {
         if (userScore === - 1) return
         setScore(score - 1)
         setUserScore(userScore - 1)
+    }
+
+    function handleHasReplied() {
+        setIsReplying(false)
     }
 
     function removeComment() {
@@ -84,10 +87,10 @@ export default function Comment(props) {
     }
 
     function CommentButtons() {
-
         const handleIsReplying = () => {
             setIsReplying(true)
         }
+
         if (props.username === props.currentUser.username) {
             return (
                 <>
@@ -108,29 +111,6 @@ export default function Comment(props) {
                 <p className='text-Moderate-blue '>Reply</p>
             </button>
         )
-    }
-
-
-
-    function addReply(reply) {
-        const myReply = buildReply(reply)
-        setReplies(previousReplies => [...previousReplies, myReply])
-        setIsReplying(false)
-    }
-
-    function buildReply(text) {
-        const date = moment()
-        const newComment = {
-            id: replies.length + 1,
-            content: text,
-            createdAt: date.fromNow(),
-            score: 0,
-            user: props.currentUser,
-            replyingTo: props.username,
-            replies: []
-        }
-
-        return newComment
     }
 
     return (
@@ -161,9 +141,11 @@ export default function Comment(props) {
                         </div>
                     </div>
                     {isReplying && (
-                        <SendComment buttonText={'REPLY'} submitComment={addReply} image={props.currentUser.image.png} />
+                        <SendComment buttonText={'REPLY'} hasReplied={handleHasReplied} submitComment={props.handleReply} image={props.currentUser.image.png} replyingTo={props.username} />
                     )}
                 </div>
+
+
             )}
         </>
     )

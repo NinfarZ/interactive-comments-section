@@ -1,6 +1,6 @@
 import { data } from 'autoprefixer'
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Comment from './Comment'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
@@ -11,40 +11,32 @@ export default function Home() {
 
 
   const currentUser = commentsData.currentUser
-  const [commentSection, setCommentSetion] = useState(commentsData.comments)
+  const [commentSection, setCommentSection] = useState(commentsData.comments)
+  const [commentCount, setCommentCount] = useState(0)
+
+  // const handleNewComment = () => {
+  //   setCommentCount(prev => prev + 1)
+  // }
 
 
   function buildCommentSection(comments) {
-    return commentSection.map(comment => buildComment(comment))
+    return comments.map(comment => buildComment(comment))
   }
 
+
   function buildComment(comment) {
-    const userData = comment.user
+
     return (
       <>
         <div>
-          <Comment currentUser={currentUser}
+          <CommentBlock currentUser={currentUser}
+            commentId={comment.id}
             key={comment.id}
-            setIsReplying={false}
-            content={comment.content}
-            createdAt={comment.createdAt}
-            score={comment.score}
-            replies={comment.replies}
-            replyingTo={comment.replyingTo || null}
-            {...userData}
+            comment={comment}
           />
 
         </div>
-        {comment.replies && comment.replies.length && (
-          <div className='before:content-[""] before:absolute before:bottom-0 before:top-0 before:left-16 before:border-l before:border-l-Light-grayish-blue relative'>
-            <div className='w-[90%] ml-auto'>
-              {comment.replies.map(reply => buildComment(reply))}
-            </div>
-          </div>
-        )}
-
       </>
-
     )
   }
 
@@ -64,8 +56,9 @@ export default function Home() {
 
   function addNewComment(text) {
     const newComment = buildCommentObj(text)
-    setCommentSetion(previousComments => [...previousComments, newComment])
+    setCommentSection(previousComments => [...previousComments, newComment])
   }
+
 
   return (
     <>
@@ -76,11 +69,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='bg-Light-gray min-h-screen font-rubik pt-5 flex justify-center'>
+
         <section className='flex flex-col '>
           {buildCommentSection(commentSection)}
 
           <SendComment buttonText={'SEND'} submitComment={addNewComment} image={currentUser.image.png} />
         </section>
+
+
 
       </main>
     </>
