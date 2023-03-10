@@ -6,18 +6,13 @@ import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 import commentsData from './api/data.json'
 import moment from 'moment/moment'
-import DeleteWarning from './DeleteWarning'
+
 
 export default function Home() {
 
 
   const currentUser = commentsData.currentUser
   const [commentSection, setCommentSection] = useState(commentsData.comments)
-
-
-  // const handleNewComment = () => {
-  //   setCommentCount(prev => prev + 1)
-  // }
 
 
   function buildCommentSection(comments) {
@@ -32,24 +27,6 @@ export default function Home() {
   }
 
 
-  // function buildComment(comment) {
-
-  //   return (
-  //     <>
-  //       <div>
-  //         {commentSection.map((comment, index) => (
-  //           <CommentBlock
-  //             currentUser={currentUser}
-  //             commentId={comment.id}
-  //             key={index}
-  //             comment={comment}
-  //           />
-  //         ))}
-
-  //       </div>
-  //     </>
-  //   )
-  // }
 
   function buildCommentObj(text) {
     const date = moment()
@@ -80,7 +57,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='bg-Light-gray min-h-screen font-rubik pt-5 flex justify-center relative'>
-        <DeleteWarning />
 
         <section className='flex flex-col '>
           {buildCommentSection(commentSection)}

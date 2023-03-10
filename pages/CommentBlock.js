@@ -1,14 +1,13 @@
 import React from 'react'
 import Comment from './Comment'
-import { useState, useEffect } from 'react'
-import SendComment from './SendComment'
+import { useState } from 'react'
 import moment from 'moment/moment'
+
 
 export default function CommentBlock(props) {
 
     const [replies, setReplies] = useState(props.comment.replies)
     const [replyCount, setReplyCount] = useState(0)
-
 
 
     function buildComment(comment) {
@@ -57,15 +56,20 @@ export default function CommentBlock(props) {
 
 
     return (
-        <div>
+
+        <>
             <div>
-                {buildComment(props.comment)}
-            </div>
-            <div className=' before:absolute before:bottom-0 before:top-0 before:left-12 before:border-l before:border-l-Light-grayish-blue relative'>
-                <div className='w-[90%] ml-auto'>
-                    {mapReplies(replies)}
+                <div>
+                    {buildComment(props.comment)}
+                </div>
+                <div className=' before:absolute before:bottom-0 before:top-0 before:left-12 before:border-l before:border-l-Light-grayish-blue relative'>
+                    <div className='w-[90%] ml-auto'>
+                        {mapReplies(replies)}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
+
+
     )
 }

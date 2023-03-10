@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import SendComment from './SendComment'
 import moment from 'moment/moment'
+import DeleteWarning from './DeleteWarning'
 
 
 export default function Comment(props) {
@@ -11,26 +12,48 @@ export default function Comment(props) {
     const [isReplying, setIsReplying] = useState(false)
     const [userScore, setUserScore] = useState(0)
     const [isVisible, setIsVisible] = useState(true)
+    const [showDeleteWarning, setShowDeleteWarning] = useState(false);
 
+    function handleShowWarning() {
+        setShowDeleteWarning(true)
+    }
 
     function like() {
-        if (userScore === 1) return
-        setScore(score + 1)
-        setUserScore(userScore + 1)
+        if (userScore === -1) return
+        if (userScore === 1) {
+            setScore(score - 1)
+            setUserScore(0)
+        } else {
+            setScore(score + 1)
+            setUserScore(1)
+        }
+
+        console.log("score: ", score)
+        console.log("userscore: ", userScore)
     }
 
     function dislike() {
-        if (userScore === - 1) return
-        setScore(score - 1)
-        setUserScore(userScore - 1)
+        if (userScore === 1) return
+        if (userScore === -1) {
+            setScore(score + 1)
+            setUserScore(0)
+        } else {
+            setScore(score - 1)
+            setUserScore(-1)
+        }
     }
 
     function handleHasReplied() {
         setIsReplying(false)
     }
 
-    function removeComment() {
+    function confirmDelete() {
         setIsVisible(false)
+        setShowDeleteWarning(false)
+    }
+
+    function cancelDelete() {
+        setShowDeleteWarning(false)
     }
 
     function editComment() {
@@ -59,11 +82,11 @@ export default function Comment(props) {
         if (props.username === props.currentUser.username) {
             return (
                 <>
-                    <button onClick={removeComment} className='flex space-x-2 items-center py-1 '>
+                    <button onClick={handleShowWarning} className='flex space-x-2 items-center py-1 hover:opacity-50'>
                         <img src='images/icon-delete.svg' alt='delete' />
                         <p className='text-Moderate-blue '>Delete</p>
                     </button>
-                    <button onClick={editComment} className='flex space-x-2 items-center py-1 '>
+                    <button onClick={editComment} className='flex space-x-2 items-center py-1 hover:opacity-50'>
                         <img src='images/icon-edit.svg' alt='edit' />
                         <p className='text-Moderate-blue '>Edit</p>
                     </button>
@@ -71,7 +94,7 @@ export default function Comment(props) {
             )
         }
         return (
-            <button onClick={handleIsReplying} className='flex space-x-2 items-center py-1 '>
+            <button onClick={handleIsReplying} className='flex space-x-2 items-center py-1 hover:opacity-50'>
                 <img src='images/icon-reply.svg' alt='reply' />
                 <p className='text-Moderate-blue '>Reply</p>
             </button>
@@ -80,38 +103,42 @@ export default function Comment(props) {
 
     return (
         <>
-            {isVisible && (
-                <div>
-                    <div className='bg-White m-3 p-5 rounded-lg max-w-5xl space-y-3'>
+            {showDeleteWarning && (<>
+                <div className='fixed inset-0 flex items-center justify-center z-10 bg-Dark-blue bg-opacity-50'>
+                    <DeleteWarning onCancel={cancelDelete} onDelete={confirmDelete} />
+                </div>
+            </>)}
+
+            {isVisible && (<div>
+                <div className='bg-White m-3 p-5 rounded-lg max-w-3xl space-y-3'>
+                    <div>
                         <div className='flex justify-start items-center space-x-4'>
                             <img src={props.image.png} width={35} height={35} alt='pfp' />
                             <Username />
                             <span className='text-Grayish-Blue'>{props.createdAt}</span>
                         </div>
                         <Content setIsEditing={setIsEditing} replyingTo={props.replyingTo} content={props.content} isEditing={isEditing} />
-                        <div className='flex justify-between my-3'>
-                            <div className='flex space-x-4 bg-Very-light-gray px-3 py-1 rounded-md'>
-                                <button onClick={like}>
-                                    <img src='images/icon-plus.svg' alt='like' />
-                                </button>
-                                <span className='text-Moderate-blue'>{score}</span>
-                                <button onClick={dislike}>
-                                    <img src='images/icon-minus.svg' alt='dislike' />
-                                </button>
-                            </div>
+                    </div>
+                    <div className='flex justify-between my-3'>
+                        <div className='flex md:flex-col space-x-4 bg-Very-light-gray px-3 py-1 rounded-md'>
+                            <button onClick={like}>
+                                <img src='images/icon-plus.svg' alt='like' />
+                            </button>
+                            <span className='text-Moderate-blue'>{score}</span>
+                            <button onClick={dislike}>
+                                <img src='images/icon-minus.svg' alt='dislike' />
+                            </button>
+                        </div>
 
-                            <div className='flex space-x-4'>
-                                <CommentButtons />
-                            </div>
+                        <div className='flex space-x-4'>
+                            <CommentButtons />
                         </div>
                     </div>
-                    {isReplying && (
-                        <SendComment buttonText={'REPLY'} hasReplied={handleHasReplied} submitComment={props.handleReply} image={props.currentUser.image.png} replyingTo={props.username} />
-                    )}
                 </div>
-
-
-            )}
+                {isReplying && (
+                    <SendComment buttonText={'REPLY'} hasReplied={handleHasReplied} submitComment={props.handleReply} image={props.currentUser.image.png} replyingTo={props.username} />
+                )}
+            </div>)}
         </>
     )
 }
@@ -149,7 +176,7 @@ function ContentEdit(props) {
                 className='bg-White border resize-none border-Light-gray py-2 px-5 rounded-md placeholder:text-start text-Grayish-Blue'
                 placeholder='Add a comment...' />
             <div className='flex justify-end my-4'>
-                <button onClick={handleEditSubmit} className='bg-Moderate-blue px-3 py-1 rounded-md'>UPDATE</button>
+                <button onClick={handleEditSubmit} className='bg-Moderate-blue px-3 py-1 rounded-md hover:opacity-50'>UPDATE</button>
             </div>
 
         </div>

@@ -19,7 +19,7 @@ export default function SendComment(props) {
 
             <div className='flex justify-between py-2'>
                 <img src={props.image} width={35} height={35} alt='pfp' />
-                <button onClick={handleCommentSubmit} className='bg-Moderate-blue px-5 py-1 rounded-md'>{buttonText}</button>
+                <button onClick={handleCommentSubmit} className='bg-Moderate-blue px-5 py-1 rounded-md hover:opacity-50'>{buttonText}</button>
             </div>
         </div>
     )
