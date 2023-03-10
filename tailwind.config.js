@@ -23,7 +23,16 @@ module.exports = {
     fontFamily: {
       'rubik': ['Rubik', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        slide: {
+          '0%, 100%': { transform: 'rotate(-3deg)' }
+        }
+      },
+      animation: {
+        slide: 'slide 1s ease-in-out linear'
+      }
+    },
   },
   plugins: [],
 }

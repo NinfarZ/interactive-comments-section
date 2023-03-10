@@ -1,7 +1,6 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import SendComment from './SendComment'
-import moment from 'moment/moment'
 import DeleteWarning from './DeleteWarning'
 
 
@@ -27,9 +26,6 @@ export default function Comment(props) {
             setScore(score + 1)
             setUserScore(1)
         }
-
-        console.log("score: ", score)
-        console.log("userscore: ", userScore)
     }
 
     function dislike() {
@@ -45,6 +41,7 @@ export default function Comment(props) {
 
     function handleHasReplied() {
         setIsReplying(false)
+
     }
 
     function confirmDelete() {
@@ -110,8 +107,8 @@ export default function Comment(props) {
             </>)}
 
             {isVisible && (<div>
-                <div className='bg-White m-3 p-5 rounded-lg max-w-3xl space-y-3'>
-                    <div>
+                <div className='flex flex-col bg-White m-3 p-4 md:pl-20 rounded-lg max-w-3xl min-h-[10rem] space-y-3 relative'>
+                    <div className='md:order-2 '>
                         <div className='flex justify-start items-center space-x-4'>
                             <img src={props.image.png} width={35} height={35} alt='pfp' />
                             <Username />
@@ -119,8 +116,8 @@ export default function Comment(props) {
                         </div>
                         <Content setIsEditing={setIsEditing} replyingTo={props.replyingTo} content={props.content} isEditing={isEditing} />
                     </div>
-                    <div className='flex justify-between my-3'>
-                        <div className='flex md:flex-col space-x-4 bg-Very-light-gray px-3 py-1 rounded-md'>
+                    <div className='flex my-3 md:order-1'>
+                        <div className='flex md:absolute left-6 md:flex-col md:items-center justify-around space-x-4 md:space-x-0 bg-Very-light-gray px-3 py-1 mr-5 rounded-md md:h-24'>
                             <button onClick={like}>
                                 <img src='images/icon-plus.svg' alt='like' />
                             </button>
@@ -129,11 +126,11 @@ export default function Comment(props) {
                                 <img src='images/icon-minus.svg' alt='dislike' />
                             </button>
                         </div>
-
-                        <div className='flex space-x-4'>
-                            <CommentButtons />
-                        </div>
                     </div>
+                    <div className='flex space-x-4 absolute right-0 bottom-0 p-4 md:top-0 md:bottom-full '>
+                        <CommentButtons />
+                    </div>
+
                 </div>
                 {isReplying && (
                     <SendComment buttonText={'REPLY'} hasReplied={handleHasReplied} submitComment={props.handleReply} image={props.currentUser.image.png} replyingTo={props.username} />
@@ -146,13 +143,12 @@ export default function Comment(props) {
 
 function Content(props) {
     const [content, setContent] = useState(props.content)
-    console.log(content)
     const replyTag = props.replyingTo ? `@${props.replyingTo}` : null
     return (
         <>
             {!props.isEditing && (
 
-                <p className='text-Grayish-Blue'><span className='text-Moderate-blue font-bold'>{replyTag}</span> {content}</p>
+                <p className='text-Grayish-Blue m-3 break-words'><span className='text-Moderate-blue font-bold'>{replyTag}</span> {content}</p>
 
             ) || <ContentEdit contentToEdit={content} setContent={setContent} setIsEditing={props.setIsEditing} />}
         </>
@@ -170,10 +166,10 @@ function ContentEdit(props) {
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className='m-3 flex flex-col'>
             <textarea onChange={handleContentChange} value={props.contentToEdit}
                 rows='5'
-                className='bg-White border resize-none border-Light-gray py-2 px-5 rounded-md placeholder:text-start text-Grayish-Blue'
+                className='bg-White border resize-none border-Light-gray py-2 px-5 rounded-md placeholder:text-start text-Grayish-Blue '
                 placeholder='Add a comment...' />
             <div className='flex justify-end my-4'>
                 <button onClick={handleEditSubmit} className='bg-Moderate-blue px-3 py-1 rounded-md hover:opacity-50'>UPDATE</button>

@@ -10,6 +10,7 @@ export default function SendComment(props) {
 
     const handleCommentSubmit = () => {
         props.submitComment(comment, props.replyingTo)
+        setComment('')
         props.hasReplied && props.hasReplied()
     }
     return (
