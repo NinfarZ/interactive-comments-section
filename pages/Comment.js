@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import SendComment from './SendComment'
 import moment from 'moment/moment'
 
@@ -9,7 +9,6 @@ export default function Comment(props) {
     const [score, setScore] = useState(props.score)
     const [isEditing, setIsEditing] = useState(false)
     const [isReplying, setIsReplying] = useState(false)
-    const [content, setContent] = useState(props.content)
     const [userScore, setUserScore] = useState(0)
     const [isVisible, setIsVisible] = useState(true)
 
@@ -38,40 +37,6 @@ export default function Comment(props) {
         setIsEditing(true)
     }
 
-    function Content() {
-        const replyTag = props.replyingTo ? `@${props.replyingTo}` : null
-        return (
-            <>
-                {!isEditing && (
-
-                    <p className='text-Grayish-Blue'><span className='text-Moderate-blue font-bold'>{replyTag}</span> {content}</p>
-
-                ) || <ContentEdit />}
-            </>
-        )
-    }
-
-    function ContentEdit() {
-        const handleContentChange = (event) => {
-            setContent(event.target.value)
-        }
-
-        const handleEditSubmit = () => {
-            setIsEditing(false)
-        }
-        return (
-            <div className='flex flex-col'>
-                <textarea onChange={handleContentChange} value={content}
-                    rows='5'
-                    className='bg-White border resize-none border-Light-gray py-2 px-5 rounded-md placeholder:text-start text-Grayish-Blue'
-                    placeholder='Add a comment...' />
-                <div className='flex justify-end my-4'>
-                    <button onClick={handleEditSubmit} className='bg-Moderate-blue px-3 py-1 rounded-md'>UPDATE</button>
-                </div>
-
-            </div>
-        )
-    }
 
     function Username() {
         return (
@@ -79,7 +44,7 @@ export default function Comment(props) {
                 {props.username === props.currentUser.username && (
                     <div>
                         <span className='text-Dark-blue font-bold'>{props.currentUser.username}</span>
-                        <span className='bg-Moderate-blue px-2'>you</span>
+                        <span className='bg-Moderate-blue px-3 mx-3'>you</span>
                     </div>
                 ) || <span className='text-Dark-blue font-bold'>{props.username}</span>}
             </>
@@ -123,7 +88,7 @@ export default function Comment(props) {
                             <Username />
                             <span className='text-Grayish-Blue'>{props.createdAt}</span>
                         </div>
-                        <Content />
+                        <Content setIsEditing={setIsEditing} replyingTo={props.replyingTo} content={props.content} isEditing={isEditing} />
                         <div className='flex justify-between my-3'>
                             <div className='flex space-x-4 bg-Very-light-gray px-3 py-1 rounded-md'>
                                 <button onClick={like}>
@@ -152,6 +117,44 @@ export default function Comment(props) {
 }
 
 
+function Content(props) {
+    const [content, setContent] = useState(props.content)
+    console.log(content)
+    const replyTag = props.replyingTo ? `@${props.replyingTo}` : null
+    return (
+        <>
+            {!props.isEditing && (
+
+                <p className='text-Grayish-Blue'><span className='text-Moderate-blue font-bold'>{replyTag}</span> {content}</p>
+
+            ) || <ContentEdit contentToEdit={content} setContent={setContent} setIsEditing={props.setIsEditing} />}
+        </>
+    )
+}
+
+function ContentEdit(props) {
+    const handleContentChange = (event) => {
+        props.setContent(event.target.value)
+
+    }
+
+    const handleEditSubmit = () => {
+        props.setIsEditing(false)
+    }
+
+    return (
+        <div className='flex flex-col'>
+            <textarea onChange={handleContentChange} value={props.contentToEdit}
+                rows='5'
+                className='bg-White border resize-none border-Light-gray py-2 px-5 rounded-md placeholder:text-start text-Grayish-Blue'
+                placeholder='Add a comment...' />
+            <div className='flex justify-end my-4'>
+                <button onClick={handleEditSubmit} className='bg-Moderate-blue px-3 py-1 rounded-md'>UPDATE</button>
+            </div>
+
+        </div>
+    )
+}
 
 
 

@@ -7,12 +7,7 @@ import moment from 'moment/moment'
 export default function CommentBlock(props) {
 
     const [replies, setReplies] = useState(props.comment.replies)
-
-
-    // useEffect(() => {
-    //     mapReplies(props.comment)
-    // }, [replies])
-
+    const [replyCount, setReplyCount] = useState(0)
 
 
 
@@ -46,7 +41,7 @@ export default function CommentBlock(props) {
     function buildReply(text, replyingTo) {
         const date = moment()
         const newComment = {
-            id: props.commentId + 1,
+            id: `reply-${replyCount}`,
             content: text,
             createdAt: date.fromNow(),
             score: 0,
@@ -54,6 +49,7 @@ export default function CommentBlock(props) {
             replyingTo: replyingTo,
 
         }
+        setReplyCount(replyCount + 1)
 
         return newComment
     }
@@ -65,7 +61,7 @@ export default function CommentBlock(props) {
             <div>
                 {buildComment(props.comment)}
             </div>
-            <div className='before:content-[""] before:absolute before:bottom-0 before:top-0 before:left-16 before:border-l before:border-l-Light-grayish-blue relative'>
+            <div className=' before:absolute before:bottom-0 before:top-0 before:left-12 before:border-l before:border-l-Light-grayish-blue relative'>
                 <div className='w-[90%] ml-auto'>
                     {mapReplies(replies)}
                 </div>
