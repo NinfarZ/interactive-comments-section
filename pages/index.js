@@ -4,7 +4,7 @@ import { useState } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 import commentsData from '../data.json'
-import moment from 'moment/moment'
+import moment from 'moment'
 
 
 export default function Home() {
