@@ -1,7 +1,5 @@
 import Comment from './Comment'
 import React, { useState } from 'react'
-import moment from 'moment'
-
 
 export default function CommentBlock(props) {
 
@@ -40,7 +38,7 @@ export default function CommentBlock(props) {
         const newComment = {
             id: `reply-${replyCount}`,
             content: text,
-            createdAt: date.fromNow(),
+            createdAt: "a second ago",
             score: 0,
             user: props.currentUser,
             replyingTo: replyingTo,

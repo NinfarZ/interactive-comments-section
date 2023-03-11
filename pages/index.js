@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 import commentsData from '../data.json'
-import moment from 'moment'
-
 
 export default function Home() {
 
@@ -29,7 +27,7 @@ export default function Home() {
     const newComment = {
       id: commentSection.length + 1,
       content: text,
-      createdAt: date.fromNow(),
+      createdAt: "a second ago",
       score: 0,
       user: currentUser,
       replies: []
