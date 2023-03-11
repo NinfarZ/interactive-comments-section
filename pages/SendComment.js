@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
 
 export default function SendComment(props) {
     const [comment, setComment] = useState('')
@@ -20,7 +19,7 @@ export default function SendComment(props) {
             <textarea onChange={handleCommentChange} value={comment} rows='5' className='bg-White border resize-none border-Light-gray py-2 px-5 rounded-md placeholder:text-start text-Grayish-Blue' placeholder='Add a comment...' />
 
             <div className='flex justify-between py-2'>
-                <Image src={"/" + props.image} width={35} height={35} alt='pfp' />
+                <img src={props.image} width={35} height={35} alt='pfp' />
                 <button onClick={handleCommentSubmit} className='bg-Moderate-blue px-5 py-1 rounded-md hover:opacity-50'>{buttonText}</button>
             </div>
         </div>

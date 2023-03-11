@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import SendComment from './SendComment'
 import DeleteWarning from './DeleteWarning'
-import Image from 'next/image'
 
 
 export default function Comment(props) {
@@ -81,11 +80,11 @@ export default function Comment(props) {
             return (
                 <>
                     <button onClick={handleShowWarning} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                        <Image width={14} height={14} src='images/icon-delete.svg' alt='delete' />
+                        <img src='images/icon-delete.svg' alt='delete' />
                         <p className='text-Moderate-blue '>Delete</p>
                     </button>
                     <button onClick={editComment} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                        <Image width={14} height={14} src='images/icon-edit.svg' alt='edit' />
+                        <img src='images/icon-edit.svg' alt='edit' />
                         <p className='text-Moderate-blue '>Edit</p>
                     </button>
                 </>
@@ -93,7 +92,7 @@ export default function Comment(props) {
         }
         return (
             <button onClick={handleIsReplying} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                <Image width={14} height={14} src='images/icon-reply.svg' alt='reply' />
+                <img src='images/icon-reply.svg' alt='reply' />
                 <p className='text-Moderate-blue '>Reply</p>
             </button>
         )
@@ -111,7 +110,7 @@ export default function Comment(props) {
                 <div className='flex flex-col bg-White m-3 p-4 md:pl-20 rounded-lg max-w-3xl min-h-[10rem] space-y-3 relative'>
                     <div className='md:order-2 '>
                         <div className='flex justify-start items-center space-x-4'>
-                            <Image src={"/" + props.image.png} width={35} height={35} alt='pfp' />
+                            <img src={props.image.png} width={35} height={35} alt='pfp' />
                             <Username />
                             <span className='text-Grayish-Blue'>{props.createdAt}</span>
                         </div>
@@ -120,11 +119,11 @@ export default function Comment(props) {
                     <div className='flex my-3 md:order-1'>
                         <div className='flex md:absolute left-6 md:flex-col md:items-center justify-around space-x-4 md:space-x-0 bg-Very-light-gray px-3 py-1 mr-5 rounded-md md:h-24'>
                             <button onClick={like}>
-                                <Image width={13} height={13} src='images/icon-plus.svg' alt='like' />
+                                <img src='images/icon-plus.svg' alt='like' />
                             </button>
                             <span className='text-Moderate-blue'>{score}</span>
                             <button onClick={dislike}>
-                                <Image width={13} height={13} src='images/icon-minus.svg' alt='dislike' />
+                                <img src='images/icon-minus.svg' alt='dislike' />
                             </button>
                         </div>
                     </div>
