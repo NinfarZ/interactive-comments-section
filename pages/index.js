@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
-import commentsData from './api/data.json'
+import commentsData from '../data.json'
 import moment from 'moment/moment'
 
 
