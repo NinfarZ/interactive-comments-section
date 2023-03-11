@@ -2,8 +2,9 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
+import commentsData from '../commentsData.json'
 
-export default function Home({ commentsData }) {
+export default function Home() {
   const currentUser = commentsData.currentUser
   const [commentSection, setCommentSection] = useState(commentsData.comments)
 
@@ -53,12 +54,5 @@ export default function Home({ commentsData }) {
   )
 }
 
-export async function getStaticProps() {
-  const commentsData = require('../commentsData.json')
-  return {
-    props: {
-      commentsData,
-    },
-  }
-}
+
 
