@@ -1,5 +1,5 @@
 import Comment from './Comment'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import moment from 'moment'
 
 

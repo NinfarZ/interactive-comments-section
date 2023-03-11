@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 
 export default function SendComment(props) {
     const [comment, setComment] = useState('')
