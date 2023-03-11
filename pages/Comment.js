@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react'
 import SendComment from './SendComment'
 import DeleteWarning from './DeleteWarning'

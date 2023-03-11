@@ -1,4 +1,3 @@
-import React from 'react'
 import Comment from './Comment'
 import { useState } from 'react'
 import moment from 'moment'
