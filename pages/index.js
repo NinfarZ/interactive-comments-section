@@ -23,7 +23,6 @@ export default function Home() {
   }
 
   function buildCommentObj(text) {
-    const date = moment()
     const newComment = {
       id: commentSection.length + 1,
       content: text,

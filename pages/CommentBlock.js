@@ -34,7 +34,6 @@ export default function CommentBlock(props) {
     }
 
     function buildReply(text, replyingTo) {
-        const date = moment()
         const newComment = {
             id: `reply-${replyCount}`,
             content: text,
