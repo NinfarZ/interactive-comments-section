@@ -1,7 +1,6 @@
 import { data } from 'autoprefixer'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import Comment from './Comment'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 import commentsData from './api/data.json'
