@@ -61,7 +61,7 @@ export default function CommentBlock(props) {
                 <div>
                     {buildComment(props.comment)}
                 </div>
-                <div className=' before:absolute before:bottom-0 before:top-0 before:left-12 before:border-l before:border-l-Light-grayish-blue relative'>
+                <div className=' before:absolute before:inset-0 before:translate-x-9 before:border-l before:border-l-Light-grayish-blue relative'>
                     <div className='w-[90%] ml-auto'>
                         {mapReplies(replies)}
                     </div>
