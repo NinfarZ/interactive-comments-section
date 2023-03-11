@@ -3,7 +3,7 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
-import commentsData from '../data.json'
+import commentsData from '../commentsData.json'
 
 export default function Home() {
 
