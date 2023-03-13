@@ -17,6 +17,11 @@ export default function Home() {
         key={comment.id}
         comment={comment}
         user={comment.user}
+        content={comment.content}
+        createdAt={comment.createdAt}
+        score={comment.score}
+        replies={comment.replies ? comment.replies : []}
+        replyingTo={comment.replyingTo || null}
       />
     ))
   }

@@ -3,21 +3,21 @@ import React, { useState } from 'react'
 
 export default function CommentBlock(props) {
 
-    // const [replies, setReplies] = useState(props.comment.replies)
+    const [replies, setReplies] = useState(props.replies)
     const [replyCount, setReplyCount] = useState(0)
 
 
-    function buildComment(comment) {
+    function buildComment() {
         const userData = props.user
 
         return <Comment currentUser={props.currentUser}
-            key={comment.id}
+            key={props.commentId}
             handleReply={addReply}
-            content={comment.content}
-            createdAt={comment.createdAt}
-            score={comment.score}
-            replies={comment.replies ? comment.replies : []}
-            replyingTo={comment.replyingTo || null}
+            content={props.content}
+            createdAt={props.createdAt}
+            score={props.score}
+            replies={props.replies}
+            replyingTo={props.replyingTo}
             {...userData}
         />
     }
@@ -56,11 +56,11 @@ export default function CommentBlock(props) {
         <>
             <div>
                 <div>
-                    {buildComment(props.comment)}
+                    {buildComment()}
                 </div>
                 <div className=' before:absolute before:left-0 before:bottom-0 before:top-0 before:translate-x-9 before:border-l before:border-l-Light-grayish-blue relative'>
                     <div className='w-[90%] ml-auto'>
-                        {/* {mapReplies(replies)} */}
+                        {mapReplies(replies)}
                     </div>
                 </div>
             </div>
