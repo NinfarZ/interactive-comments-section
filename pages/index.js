@@ -5,6 +5,7 @@ import CommentBlock from './CommentBlock'
 import commentsData from './api/commentsData.json'
 
 export default function Home() {
+  console.log(commentsData)
   const currentUser = commentsData.currentUser
   const [commentSection, setCommentSection] = useState(commentsData.comments)
 

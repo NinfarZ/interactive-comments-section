@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 export default function CommentBlock(props) {
 
-    const [replies, setReplies] = useState(props.comment.replies || [])
+    const [replies, setReplies] = useState(props.comment.replies || null)
     const [replyCount, setReplyCount] = useState(0)
 
 
@@ -16,7 +16,7 @@ export default function CommentBlock(props) {
             content={comment.content}
             createdAt={comment.createdAt}
             score={comment.score}
-            replies={comment.replies ? comment.replies : []}
+            replies={comment.replies ? comment.replies : null}
             replyingTo={comment.replyingTo || null}
             {...userData}
         />
