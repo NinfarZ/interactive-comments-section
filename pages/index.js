@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
-import commentsData from './api/CommentsData.json'
+import commentsData from './api/commentsData.json'
 
 export default function Home() {
   const currentUser = commentsData.currentUser
