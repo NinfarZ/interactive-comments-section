@@ -12,7 +12,7 @@ export default function Home() {
   function buildCommentSection(comments) {
     return comments.map(comment => (
       <CommentBlock
-        currentUser={currentUser}
+        // currentUser={currentUser}
         commentId={comment.id}
         key={comment.id}
         comment={comment}

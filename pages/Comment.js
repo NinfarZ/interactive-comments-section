@@ -62,7 +62,7 @@ export default function Comment(props) {
             <>
                 {props.username === props.currentUser.username && (
                     <div>
-                        <span className='text-Dark-blue font-bold'>{props.currentUser.username}</span>
+                        <span className='text-Dark-blue font-bold'>{props.username}</span>
                         <span className='bg-Moderate-blue px-3 mx-3'>you</span>
                     </div>
                 ) || <span className='text-Dark-blue font-bold'>{props.username}</span>}
@@ -132,7 +132,7 @@ export default function Comment(props) {
 
                 </div>
                 {isReplying && (
-                    <SendComment buttonText={'REPLY'} hasReplied={handleHasReplied} submitComment={props.handleReply} image={props.currentUser.image.png} replyingTo={props.username} />
+                    <SendComment buttonText={'REPLY'} hasReplied={handleHasReplied} submitComment={props.handleReply} image={props.image} replyingTo={props.username} />
                 )}
             </div>)}
         </>
