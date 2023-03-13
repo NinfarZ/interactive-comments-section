@@ -55,11 +55,10 @@ export default function Home({ commentsData }) {
 }
 
 export async function getStaticProps() {
-  const commentsData = await fetch('../commentsData.json')
-  const data = await commentsData.json()
+  const commentsData = require('../commentsData.json')
   return {
     props: {
-      data,
+      commentsData,
     },
   }
 }
