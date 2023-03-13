@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Solution](https://your-solution-url.com)
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/interactive-comments-section-using-nextjs-and-tailwind-css-6s-QnSM8Vi)
 - Live Site URL: [live](https://interactive-comments-section-neon.vercel.app/)
 
 ## My process
