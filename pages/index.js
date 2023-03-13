@@ -1,11 +1,15 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 
 export default function Home({ commentsData }) {
   const currentUser = commentsData.currentUser
-  const [commentSection, setCommentSection] = useState(commentsData.comments)
+  const [commentSection, setCommentSection] = useState([])
+
+  useEffect(() => {
+    setCommentSection(commentsData.comments)
+  }, [])
 
   function buildCommentSection(comments) {
     return comments.map(comment => (
