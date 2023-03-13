@@ -8,7 +8,7 @@ export default function CommentBlock(props) {
 
 
     function buildComment(comment) {
-        const userData = comment.user
+        const userData = props.user
 
         return <Comment currentUser={props.currentUser}
             key={comment.id}
