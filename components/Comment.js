@@ -79,11 +79,11 @@ export default function Comment(props) {
             return (
                 <>
                     <button onClick={handleShowWarning} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                        <img src='/icon-delete.svg' alt='delete' />
+                        <img src='/icon-delete.svg' alt='deleteImg' />
                         <p className='text-Moderate-blue '>Delete</p>
                     </button>
                     <button onClick={editComment} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                        <img src='/icon-edit.svg' alt='edit' />
+                        <img src='/icon-edit.svg' alt='editImg' />
                         <p className='text-Moderate-blue '>Edit</p>
                     </button>
                 </>
@@ -91,7 +91,7 @@ export default function Comment(props) {
         }
         return (
             <button onClick={handleIsReplying} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                <img src='/icon-reply.svg' alt='reply' />
+                <img src='/icon-reply.svg' alt='replyImg' />
                 <p className='text-Moderate-blue '>Reply</p>
             </button>
         )

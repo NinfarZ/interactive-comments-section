@@ -47,6 +47,7 @@ export default function Home() {
       </Head>
       <main className='font-rubik py-5 flex justify-center'>
         <section className='flex flex-col '>
+          <h1 className='sr-only'>comment section</h1>
           {buildCommentSection(commentSection)}
           <SendComment buttonText={'SEND'} submitComment={addNewComment} image={currentUser.image.png} />
         </section>
