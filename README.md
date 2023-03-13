@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [live](https://ninfarz.github.io/interactive-comments-section)
+- Solution URL: [Solution](https://your-solution-url.com)
+- Live Site URL: [live](https://interactive-comments-section-neon.vercel.app/)
 
 ## My process
 
