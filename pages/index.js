@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react'
-import SendComment from './SendComment'
-import CommentBlock from './CommentBlock'
+import SendComment from '../components/SendComment'
+import CommentBlock from '../components/CommentBlock'
 
 export default function Home({ commentsData }) {
   const [currentUser, setCurrentUser] = useState(commentsData.currentUser)
