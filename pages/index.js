@@ -16,7 +16,8 @@ export default function Home() {
         commentId={comment.id}
         key={comment.id}
         comment={comment}
-        user={comment.user}
+        username={comment.user.username}
+        image={comment.user.image.png}
         content={comment.content}
         createdAt={comment.createdAt}
         score={comment.score}

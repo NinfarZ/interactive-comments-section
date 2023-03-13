@@ -8,8 +8,6 @@ export default function CommentBlock(props) {
 
 
     function buildComment() {
-        const userData = props.user
-
         return <Comment currentUser={props.currentUser}
             key={props.commentId}
             handleReply={addReply}
@@ -18,7 +16,8 @@ export default function CommentBlock(props) {
             score={props.score}
             replies={props.replies}
             replyingTo={props.replyingTo}
-            {...userData}
+            username={props.username}
+            image={props.image}
         />
     }
 

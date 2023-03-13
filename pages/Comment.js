@@ -109,7 +109,7 @@ export default function Comment(props) {
                 <div className='flex flex-col bg-White m-3 p-4 md:pl-20 rounded-lg max-w-3xl min-h-[10rem] space-y-3 relative'>
                     <div className='md:order-2 '>
                         <div className='flex justify-start items-center space-x-4'>
-                            <img src={props.image.png} width={35} height={35} alt='pfp' />
+                            <img src={props.image} width={35} height={35} alt='pfp' />
                             <Username />
                             <span className='text-Grayish-Blue'>{props.createdAt}</span>
                         </div>
