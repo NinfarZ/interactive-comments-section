@@ -78,21 +78,21 @@ export default function Comment(props) {
         if (props.username === props.currentUser.username) {
             return (
                 <>
-                    <button onClick={handleShowWarning} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                        <img src='/icon-delete.svg' alt='deleteImg' />
-                        <p className='text-Moderate-blue '>Delete</p>
+                    <button onClick={handleShowWarning} className='flex space-x-2 items-center py-1 hover:opacity-50 text-Moderate-blue '>
+                        <img className='mr-2' src='/icon-delete.svg' alt='deleteImg' />
+                        Delete
                     </button>
-                    <button onClick={editComment} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                        <img src='/icon-edit.svg' alt='editImg' />
-                        <p className='text-Moderate-blue '>Edit</p>
+                    <button onClick={editComment} className='flex space-x-2 items-center py-1 hover:opacity-50 text-Moderate-blue '>
+                        <img className='mr-2' src='/icon-edit.svg' alt='editImg' />
+                        Edit
                     </button>
                 </>
             )
         }
         return (
-            <button onClick={handleIsReplying} className='flex space-x-2 items-center py-1 hover:opacity-50'>
-                <img src='/icon-reply.svg' alt='replyImg' />
-                <p className='text-Moderate-blue '>Reply</p>
+            <button onClick={handleIsReplying} className='flex space-x-2 items-center py-1 hover:opacity-50 text-Moderate-blue '>
+                <img className='mr-2' src='/icon-reply.svg' alt='replyImg' />
+                Reply
             </button>
         )
     }
