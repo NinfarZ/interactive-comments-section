@@ -7,17 +7,17 @@ export default function CommentBlock(props) {
     const [replyCount, setReplyCount] = useState(0)
 
 
-    function buildComment() {
-        const userData = props.comment.user
+    function buildComment(comment) {
+        const userData = comment.user
 
         return <Comment currentUser={props.currentUser}
-            key={props.comment.id}
+            key={comment.id}
             handleReply={addReply}
-            content={props.comment.content}
-            createdAt={props.comment.createdAt}
-            score={props.comment.score}
-            replies={props.comment.replies ? props.comment.replies : []}
-            replyingTo={props.comment.replyingTo || null}
+            content={comment.content}
+            createdAt={comment.createdAt}
+            score={comment.score}
+            replies={comment.replies ? comment.replies : []}
+            replyingTo={comment.replyingTo || null}
             {...userData}
         />
     }
@@ -56,7 +56,7 @@ export default function CommentBlock(props) {
         <>
             <div>
                 <div>
-                    {buildComment()}
+                    {buildComment(props.comment)}
                 </div>
                 <div className=' before:absolute before:left-0 before:bottom-0 before:top-0 before:translate-x-9 before:border-l before:border-l-Light-grayish-blue relative'>
                     <div className='w-[90%] ml-auto'>

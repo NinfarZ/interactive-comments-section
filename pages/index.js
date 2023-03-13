@@ -15,7 +15,7 @@ export default function Home() {
         currentUser={currentUser}
         commentId={comment.id}
         key={comment.id}
-        comment={comment}
+        comment={comment && comment}
       />
     ))
   }
