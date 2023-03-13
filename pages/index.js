@@ -4,12 +4,9 @@ import SendComment from './SendComment'
 import CommentBlock from './CommentBlock'
 
 export default function Home({ commentsData }) {
-  const currentUser = commentsData.currentUser
-  const [commentSection, setCommentSection] = useState([])
+  const [currentUser, setCurrentUser] = useState(commentsData.currentUser)
+  const [commentSection, setCommentSection] = useState(commentsData.comments)
 
-  useEffect(() => {
-    setCommentSection(commentsData.comments)
-  }, [])
 
   function buildCommentSection(comments) {
     return comments.map(comment => (
