@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 export default function CommentBlock(props) {
 
-    const [replies, setReplies] = useState(props.comment.replies)
+    // const [replies, setReplies] = useState(props.comment.replies)
     const [replyCount, setReplyCount] = useState(0)
 
 
@@ -60,7 +60,7 @@ export default function CommentBlock(props) {
                 </div>
                 <div className=' before:absolute before:left-0 before:bottom-0 before:top-0 before:translate-x-9 before:border-l before:border-l-Light-grayish-blue relative'>
                     <div className='w-[90%] ml-auto'>
-                        {mapReplies(replies)}
+                        {/* {mapReplies(replies)} */}
                     </div>
                 </div>
             </div>
