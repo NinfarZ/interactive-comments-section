@@ -63,7 +63,7 @@ export default function Comment(props) {
                 {props.username === props.currentUser.username && (
                     <div>
                         <span className='text-Dark-blue font-bold'>{props.currentUser.username}</span>
-                        <span className='bg-Moderate-blue px-3 mx-3'>you</span>
+                        <span className='bg-Moderate-blue px-1.5  rounded-sm mx-3'>you</span>
                     </div>
                 ) || <span className='text-Dark-blue font-bold'>{props.username}</span>}
             </>
@@ -106,7 +106,7 @@ export default function Comment(props) {
             </>)}
 
             {isVisible && (<div>
-                <div className='flex flex-col bg-White m-3 p-4 md:pl-20 rounded-lg max-w-3xl min-h-[10rem] space-y-3 relative'>
+                <div className='flex flex-col bg-White m-3 px-4 py-3 md:pl-20 rounded-lg max-w-3xl min-h-[10rem] space-y-3 relative'>
                     <div className='md:order-2 '>
                         <div className='flex justify-start items-center space-x-4'>
                             <img src={props.image.png} width={35} height={35} alt='pfp' />
@@ -116,17 +116,17 @@ export default function Comment(props) {
                         <Content setIsEditing={setIsEditing} replyingTo={props.replyingTo} content={props.content} isEditing={isEditing} />
                     </div>
                     <div className='flex my-3 md:order-1'>
-                        <div className='flex md:absolute left-6 md:flex-col md:items-center justify-around space-x-4 md:space-x-0 bg-Very-light-gray px-3 py-1 mr-5 rounded-md md:h-24'>
-                            <button onClick={like}>
+                        <div className='flex md:absolute left-6 md:flex-col md:items-center justify-around space-x-4 md:space-x-0 bg-Very-light-gray mr-5 rounded-md md:h-24'>
+                            <button className='p-3 aspect-square ' onClick={like}>
                                 <img src='/icon-plus.svg' alt='like' />
                             </button>
-                            <span className='text-Moderate-blue'>{score}</span>
-                            <button onClick={dislike}>
+                            <span className='py-2 md:py-0 text-Moderate-blue'>{score}</span>
+                            <button className='p-3 aspect-square ' onClick={dislike}>
                                 <img src='/icon-minus.svg' alt='dislike' />
                             </button>
                         </div>
                     </div>
-                    <div className='flex space-x-4 absolute right-0 bottom-0 p-4 md:top-0 md:bottom-full '>
+                    <div className='flex space-x-4 absolute right-0 bottom-0 p-5 md:top-0 md:bottom-full '>
                         <CommentButtons />
                     </div>
 
@@ -147,7 +147,7 @@ function Content(props) {
         <>
             {!props.isEditing && (
 
-                <p className='text-Grayish-Blue m-3 break-words'><span className='text-Moderate-blue font-bold'>{replyTag}</span> {content}</p>
+                <p className='text-Grayish-Blue my-3 break-words'><span className='text-Moderate-blue font-bold'>{replyTag}</span> {content}</p>
 
             ) || <ContentEdit contentToEdit={content} setContent={setContent} setIsEditing={props.setIsEditing} />}
         </>
